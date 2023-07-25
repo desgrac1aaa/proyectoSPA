@@ -1,0 +1,94 @@
+<br>
+<h3 class="subelegant-title">Tipos de documento </h3>
+
+  <div style="text-align: center;" class="container-fluid">
+    <button id="boton1" class="btn btn-borde" type="button" data-bs-toggle="modal" data-bs-target="#tipodocumentoModal"
+    (click)="formularioCrear()" style="margin: auto;">Crear</button>
+    <div class="col-6" style="margin: auto;">
+      <table class="table" style="margin:auto;">
+        <thead>
+          <tr>
+            <th class="h5">ID</th>
+            <th class="h5">Nombre</th>
+            <th class="h5">Descripcion</th>
+            <th class="h5">Editar tipo documento</th>
+            <th class="h5">Borrar tipo documento</th>
+          </tr>
+        </thead>       
+        <tbody>
+          <tr *ngFor="let t of tipodocumentos">
+            <td>
+              <dd>{{t.id}}</dd>
+            </td>
+            <td>
+              <dd>{{t.nombre}}</dd>
+            </td>
+            <td>
+              <dd>{{t.descripcion}}</dd>
+            </td>
+            <td>
+              <dd> <button id="btn2" class="btn btn-bootstrap" type="button" data-bs-toggle="modal" data-bs-target="#updatetipodocumentoModal"
+                (click)="formularioEditar(t)">Editar tipo documento</button></dd>
+            </td>
+            <td>
+              <dd><button id="btn2" class="btn btn-bootstrap" (click)="deleteTipodocumento(t)">Borrar tipo documento</button></dd>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal fade" id="tipodocumentoModal" tabindex="-1" aria-labelledby="tipodocumentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exampleModalLabel">Crear un nuevo tipo documento</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="tipodocumentoForm" (ngSubmit)="!tipodocumentoForm.invalid">
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="nombre">Nombre</label>
+              <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre" />
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="descripcion">Descripción</label>
+              <input novalidate id="descripcion" class="form-control" formControlName="descripcion"placeholder="Descripcion" />
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!tipodocumentoForm.valid"
+              (click)="createTipodocumento(tipodocumentoForm.value)">Crear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updatetipodocumentoModal" tabindex="-1" aria-labelledby="tipodocumentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exampleModalLabel">Editar un tipo documento</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="tipodocumentoForm" (ngSubmit)="!tipodocumentoForm.invalid">
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="nombre">Nombre</label>
+              <input novalidate id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre" />
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="descripcion">Descripcion</label>
+              <input novalidate id="descripcion" class="form-control" formControlName="descripcion"placeholder="Descripcion" />
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!tipodocumentoForm.valid"
+              (click)="updateTipodocumento(tipodocumentoForm.value)">Actualizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
